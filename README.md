@@ -10,10 +10,10 @@ Steps I used to create this tarball
 
 Thanks to https://github.com/migrantgeek/bash-syslog.git for the helpful information. 
 
-* I reviewed the patch file from the github repository below, added it to /usr/src/redhat/SOURCES
+* I reviewed the patch file from the github repository above, added it to /usr/src/redhat/SOURCES
 * diffed the spec found in the github repoistory and the one from the SRPM /usr/src/redhat/SPECS/bash.spec
 * Ensured there were no security concerns
-* Using the diff results found in the github repository vs the spec file /usr/src/redhat/SPECS/bash.spec.  I manually updated/added information I cared about to /usr/src/redhat/SPECS/bash.spec.  Here is the resulting diff.
+* Using the diff results found in the github repository vs the SRPM spec file /usr/src/redhat/SPECS/bash.spec.  I manually updated/added information I cared about to /usr/src/redhat/SPECS/bash.spec.  Here is the resulting diff.
 ```
 [root@rpmbuild5 SPECS]# diff -Naur /usr/src/redhat/SPECS/bash.spec bash.spec 
 --- /usr/src/redhat/SPECS/bash.spec	2013-06-27 02:43:12.000000000 -0600

@@ -7,6 +7,9 @@ This binary was created from the modified version of the CentOS 5.10 SRPM found 
 
 Steps I used to create this tarball
 ===================================
+
+Thanks to https://github.com/migrantgeek/bash-syslog.git for the helpful information. 
+
 * I reviewed the patch file from the github repository below, added it to /usr/src/redhat/SOURCES
 * diffed the spec found in the github repoistory and the one from the SRPM /usr/src/redhat/SPECS/bash.spec
 * Ensured there were no security concerns
@@ -48,8 +51,6 @@ Steps I used to create this tarball
    corrupting internal data structures.
 ```
 
-
-Thanks to https://github.com/migrantgeek/bash-syslog.git for the helpful information. 
 
 Rebuild the RPM
 ===============

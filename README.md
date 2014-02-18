@@ -60,10 +60,20 @@ Rebuild the RPM
 ===============
 NOTE: Ensure you have a CentOS/RHEL 5.x machine setup with the rpm-build packages.  Also some familiarity for how rpmbuild works would be helpful if there are issues.  
 
+NOTE: The recommended way for building RPMS is using a non-root user, however, I normally build RPMS as root in a test VM that is disposable.
+
 Download the SRPM version on your CentOS 5.x machine
 ```
 wget http://vault.centos.org/5.10/os/SRPMS/bash-3.2-32.el5_9.1.src.rpm
 rpm -ivh bash-3.2-32.el5_9.1.src.rpm
+```
+
+* Copy the syslog patch for the C library  
+```
+sudo su -
+cd /root
+git clone https://github.com/codylane/centos5-bash-syslog
+cp /root/centos5-bash-syslog/bash-3.2-syslog.patch /usr/src/redhat/SOURCES/
 ```
 
 * Copy the patch file from this repository to the SPECS directory
@@ -72,4 +82,9 @@ cp /root/centos5-bash-syslog/bash3.2-32.1.spec.patch /usr/src/redhat/SPECS
 yum install patch
 cd /usr/src/redhat/SPECS
 patch < bash3.2-32.1.spec.patch
+```
+
+* rebuild the RPM
+```
+rpmbuild -ba bash.spec
 ```

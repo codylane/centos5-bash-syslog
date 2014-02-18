@@ -1,12 +1,11 @@
 centos5-bash-syslog
 ===================
 
-All the components you need to get syslog enabled on bash bash-3.2-32.1.  This includes all the source files, patch files... etc.
+All the components you need to get syslog enabled on bash bash-3.2-32.1. 
 
-This binary was created from the modified version of the CentOS 5.10 SRPM found here: http://vault.centos.org/5.10/os/SRPMS/bash-3.2-32.el5_9.1.src.rpm
 
-Steps I used to create this tarball
-===================================
+Steps Used To Create Bash Syslog
+================================
 
 Thanks to https://github.com/migrantgeek/bash-syslog.git for the helpful information. 
 * Download the SRPM from the vault to your CentOS 5 machine you will use to rebuild this RPM
@@ -17,9 +16,7 @@ wget http://vault.centos.org/5.10/os/SRPMS/bash-3.2-32.el5_9.1.src.rpm
 ```
 git clone https://github.com/migrantgeek/bash-syslog.git
 ```
-* I reviewed the patch file from the github repository above, added it to /usr/src/redhat/SOURCES
-* diffed the spec found in the github repoistory and the one from the SRPM /usr/src/redhat/SPECS/bash.spec
-* Ensured there were no security concerns
+* Using the bash.spec in the cloned directory, I did diff on the SRPM version /usr/src/redhat/SPECS/bash.spec because I wanted to make sure there was no securiy concerns and to make sure the recent patches were applied.  
 * Using the diff results found in the github repository vs the SRPM spec file /usr/src/redhat/SPECS/bash.spec.  I manually updated/added information I cared about to /usr/src/redhat/SPECS/bash.spec.  Here is the resulting diff.
 ```
 [root@rpmbuild5 SPECS]# diff -Naur /usr/src/redhat/SPECS/bash.spec bash.spec 
@@ -63,9 +60,16 @@ Rebuild the RPM
 ===============
 NOTE: Ensure you have a CentOS/RHEL 5.x machine setup with the rpm-build packages.  Also some familiarity for how rpmbuild works would be helpful if there are issues.  
 
-Next download tarball 
+Download the SRPM version on your CentOS 5.x machine
 ```
-tar zxvf centos5-bash-3.2-32.1-syslog.tar.gz -C /
+wget http://vault.centos.org/5.10/os/SRPMS/bash-3.2-32.el5_9.1.src.rpm
+rpm -ivh bash-3.2-32.el5_9.1.src.rpm
+```
+
+* Copy the patch file from this repository to the SPECS directory
+```
+cp /root/centos5-bash-syslog/bash3.2-32.1.spec.patch /usr/src/redhat/SPECS
+yum install patch
 cd /usr/src/redhat/SPECS
-rpmbuild -ba bash.spec
+patch < bash3.2-32.1.spec.patch
 ```

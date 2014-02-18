@@ -9,7 +9,14 @@ Steps I used to create this tarball
 ===================================
 
 Thanks to https://github.com/migrantgeek/bash-syslog.git for the helpful information. 
-
+* Download the SRPM from the vault to your CentOS 5 machine you will use to rebuild this RPM
+```
+wget http://vault.centos.org/5.10/os/SRPMS/bash-3.2-32.el5_9.1.src.rpm
+```
+* Cloned the git repository to your CentOS 5 machine
+```
+git clone https://github.com/migrantgeek/bash-syslog.git
+```
 * I reviewed the patch file from the github repository above, added it to /usr/src/redhat/SOURCES
 * diffed the spec found in the github repoistory and the one from the SRPM /usr/src/redhat/SPECS/bash.spec
 * Ensured there were no security concerns
